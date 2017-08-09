@@ -1,26 +1,32 @@
 package lc2;
 
-public class SearchinRotatedSortedArray_33 {
+public class SearchinRotatedSortedArrayII {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 	}
 	
-	
-	public int search(int[] nums, int target) {
-        int len = nums.length;
+	 public boolean search(int[] nums, int target) {
+         int len = nums.length;
         if(len < 1)
-            return -1;
+            return false;
         int begin = 0;
         int end = len - 1;
         if(nums[end] == target)
-            return end;
+            return true;
         else if(nums[end] < target){
             while(begin + 1 < end){
                 int mid = begin + (end - begin)/2;
                 if(nums[mid] == target){
-                    return mid;
+                    return true;
+                }else if(nums[mid] == nums[0] && nums[mid] == nums[len - 1]){
+                    end--;
+                    begin++;
+                    if(nums[begin] == target)
+                        return true;
+                    else if(nums[end] == target)
+                        return true;
                 }else if(nums[mid] > target){
                     end = mid;
                 }else if(nums[mid] < target && nums[mid] < nums[0]){
@@ -30,16 +36,23 @@ public class SearchinRotatedSortedArray_33 {
                 }
             }
             if(nums[begin] == target)
-                return begin;
+                return true;
             else if(nums[end] == target)
-                return end;
+                return true;
             else
-                return -1;
+                return false;
         }else{
             while(begin + 1 < end){
                 int mid = begin + (end - begin)/2;
                 if(nums[mid] == target){
-                    return mid;
+                    return true;
+                }else if(nums[mid] == nums[0] && nums[mid] == nums[len - 1]){
+                    end--;
+                    begin++;
+                    if(nums[begin] == target)
+                        return true;
+                    else if(nums[end] == target)
+                        return true;
                 }else if(nums[mid] < target){
                     begin = mid;
                 }else if(nums[mid] > target && nums[mid] > nums[len - 1]){
@@ -49,11 +62,11 @@ public class SearchinRotatedSortedArray_33 {
                 }
             }
             if(nums[begin] == target)
-                return begin;
+                return true;
             else if(nums[end] == target)
-                return end;
+                return true;
             else
-                return -1;
+                return false;
         }
     }
 
