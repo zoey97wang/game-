@@ -7,67 +7,47 @@ public class SearchinRotatedSortedArrayII {
 
 	}
 	
-	 public boolean search(int[] nums, int target) {
-         int len = nums.length;
+	public boolean search(int[] nums, int target) {
+        int len = nums.length;
         if(len < 1)
             return false;
         int begin = 0;
         int end = len - 1;
-        if(nums[end] == target)
-            return true;
-        else if(nums[end] < target){
-            while(begin + 1 < end){
-                int mid = begin + (end - begin)/2;
-                if(nums[mid] == target){
+        while(begin + 1 < end){
+            int mid = begin + (end - begin)/2;
+            if(nums[mid] == target){
+                return true;
+            }else if(nums[mid] == nums[0] && nums[mid] == nums[len - 1]){
+                end--;
+                begin++;
+                if(nums[begin] == target)
                     return true;
-                }else if(nums[mid] == nums[0] && nums[mid] == nums[len - 1]){
-                    end--;
-                    begin++;
-                    if(nums[begin] == target)
-                        return true;
-                    else if(nums[end] == target)
-                        return true;
-                }else if(nums[mid] > target){
+                else if(nums[end] == target)
+                    return true;
+            }else if(nums[len -1] < target){
+                if(nums[mid] > target){
                     end = mid;
                 }else if(nums[mid] < target && nums[mid] < nums[0]){
                     end = mid;
                 }else{
                     begin = mid;
                 }
-            }
-            if(nums[begin] == target)
-                return true;
-            else if(nums[end] == target)
-                return true;
-            else
-                return false;
-        }else{
-            while(begin + 1 < end){
-                int mid = begin + (end - begin)/2;
-                if(nums[mid] == target){
-                    return true;
-                }else if(nums[mid] == nums[0] && nums[mid] == nums[len - 1]){
-                    end--;
-                    begin++;
-                    if(nums[begin] == target)
-                        return true;
-                    else if(nums[end] == target)
-                        return true;
-                }else if(nums[mid] < target){
+            }else{
+                if(nums[mid] < target){
                     begin = mid;
                 }else if(nums[mid] > target && nums[mid] > nums[len - 1]){
                     begin = mid;
                 }else{
                     end = mid;
-                }
+                } 
             }
-            if(nums[begin] == target)
-                return true;
-            else if(nums[end] == target)
-                return true;
-            else
-                return false;
         }
+        if(nums[begin] == target)
+            return true;
+        else if(nums[end] == target)
+            return true;
+        else
+            return false;
     }
 
 }
