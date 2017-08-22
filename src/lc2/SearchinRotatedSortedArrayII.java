@@ -4,7 +4,7 @@ public class SearchinRotatedSortedArrayII {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		System.out.println(3/2.000);
 	}
 	
 	public boolean search(int[] nums, int target) {
